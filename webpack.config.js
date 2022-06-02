@@ -12,13 +12,16 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css/,//正規表現 .cssというファイル名を検知
+				test: /\.(css|sass|scss)/,//正規表現 .cssというファイル名を検知
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader, //loaderは下から上に適用
 					},
 					{
-						loader: 'css-loader', // css-loaderを使う
+						loader: 'css-loader',
+					},
+					{
+						loader: 'sass-loader',
 					},
 				]
 			},{
@@ -49,7 +52,7 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: './stylesheets/main.css',
+			filename: './stylesheets/main.ecss',
 		}),
 		new HtmlWebpackPlugin({
 			template: './src/templates/index.pug',
@@ -58,6 +61,10 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/templates/access.pug',
 			filename: 'access.html',
+		}),
+		new HtmlWebpackPlugin({
+			template: './src/templates/members/taro.pug',
+			filename: 'members/taro.html',
 		}),
 		new CleanWebpackPlugin(),
 	],
